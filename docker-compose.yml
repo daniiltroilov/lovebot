@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  love-bot:
+    container_name: love-bot-cont
+    build: .
+    restart: always
+    env_file: .env
