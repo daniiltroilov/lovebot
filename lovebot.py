@@ -7,8 +7,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from datetime import datetime
 import logging
 import pytz
-import os
-API_TOKEN = os.getenv('API_TOKEN')
+API_TOKEN = '7667439532:AAFRPIc5dE2qLEn4jaw2XcOFLDDeqd4ErMQ'
 ALLOWED_USER_ID = (611327348, 5792327667)  # ← замени на свой user_id
 MSK = pytz.timezone('Europe/Moscow')
 
