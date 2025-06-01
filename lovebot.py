@@ -115,7 +115,7 @@ async def main():
     logging.info("Бот запускается...")
     scheduler.add_job(send_morning_message, 'cron', hour=11, minute=0, timezone=MSK)
     scheduler.add_job(send_night_message, 'cron', hour=3, minute=0, timezone=MSK)
-    scheduler.add_job(send_night_message, 'cron', hour=8, minute=0, timezone=MSK)
+    scheduler.add_job(send_night_message, 'cron', hour=8, minute=30, timezone=MSK)
     scheduler.start()
     logging.info("Бот работает...")
     await dp.start_polling(bot)
