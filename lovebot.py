@@ -1,4 +1,4 @@
-﻿# 7667439532:AAFRPIc5dE2qLEn4jaw2XcOFLDDeqd4ErMQ
+# 7667439532:AAFRPIc5dE2qLEn4jaw2XcOFLDDeqd4ErMQ
 import asyncio
 import random
 from aiogram import Bot, Dispatcher, F
@@ -89,14 +89,17 @@ scheduler = AsyncIOScheduler()
 async def send_morning_message():
     try:
         msg = random.choice(MORNING_MESSAGES)
-        await bot.send_message(ALLOWED_USER_ID, f"☀️ {msg}")
+        for user_id in ALLOWED_USER_ID:
+            await bot.send_message(user_id, f"☀️ {msg}")
     except Exception as e:
         logging.error(f"Ошибка утреннего сообщения: {e}")
 
 async def send_night_message():
+    
     try:
         msg = random.choice(NIGHT_MESSAGES)
-        await bot.send_message(ALLOWED_USER_ID, f"🌙 {msg}")
+        for user_id in ALLOWED_USER_ID:
+            await bot.send_message(user_id, f"🌙 {msg}")
     except Exception as e:
         logging.error(f"Ошибка ночного сообщения: {e}")
 
@@ -109,9 +112,12 @@ async def handle_message(message: Message):
         await message.answer("Ты не мой любимый человек 🤬🤬🤬")
 
 async def main():
+    logging.info("Бот запускается...")
     scheduler.add_job(send_morning_message, 'cron', hour=11, minute=0, timezone=MSK)
     scheduler.add_job(send_night_message, 'cron', hour=3, minute=0, timezone=MSK)
+    scheduler.add_job(send_night_message, 'cron', hour=8, minute=0, timezone=MSK)
     scheduler.start()
+    logging.info("Бот работает...")
     await dp.start_polling(bot)
 
 if __name__ == '__main__':
